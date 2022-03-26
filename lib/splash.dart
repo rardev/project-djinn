@@ -27,6 +27,7 @@ class _Splashstate extends State<Splash> {
     });
   }
 
+// This widget handles the splash screen design
   @override
   Widget build(BuildContext context) {
     return Scaffold(
