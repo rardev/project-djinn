@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_djinn/main.dart';
+import 'package:project_djinn/pages/home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -17,12 +17,12 @@ class _Splashstate extends State<Splash> {
   }
 
   _navigateToHome() async {
-    await Future.delayed(Duration(milliseconds: 1000), () {
+    await Future.delayed(const Duration(milliseconds: 1000), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => MyHomePage(
-                    title: 'Home',
+              builder: (context) => const Home(
+                    //title: 'Home',
                   )));
     });
   }
@@ -33,7 +33,7 @@ class _Splashstate extends State<Splash> {
     return Scaffold(
       body: Center(
           child: Container(
-              child: Text(
+              child: const Text(
         'Djinn',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ))),
