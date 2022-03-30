@@ -1,3 +1,9 @@
+#macOS only
+
 .DS_Store
+
+#project specific
+
 .dart_tool/
 build/
+
