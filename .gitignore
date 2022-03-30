@@ -7,4 +7,5 @@
 .dart_tool/
 build/
 .idea/
+.packages
 
