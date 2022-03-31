@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class logIn extends StatefulWidget {
@@ -65,23 +66,26 @@ class _textInputBoxState extends State<textInputBox> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: 200.0,
-        child: TextField(
-          controller: textController,
-          obscureText: widget.isPassword,
-          //expands: true,
-          //cursorWidth: 10.0,
-          //cursorColor: Colors.amber,
-          decoration: InputDecoration(
-              hintText: widget.label,
-              //contentPadding: const EdgeInsets.fromLTRB(-20.0, 20.0, -20.0, 20.0),
-              border: const OutlineInputBorder(),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  textController.clear();
-                },
-                icon: const Icon(Icons.clear),
-              )),
+        width: maxSize(context, 500.0),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(widget.boxSize[0], widget.boxSize[1], widget.boxSize[2], widget.boxSize[3]),
+          child: TextField(
+            controller: textController,
+            obscureText: widget.isPassword,
+            //expands: true,
+            //cursorWidth: 10.0,
+            //cursorColor: Colors.amber,
+            decoration: InputDecoration(
+                hintText: widget.label,
+                //contentPadding: const EdgeInsets.fromLTRB(-20.0, 20.0, -20.0, 20.0),
+                border: const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    textController.clear();
+                  },
+                  icon: const Icon(Icons.clear),
+                )),
+          ),
         ),
       ),
     );
@@ -89,3 +93,12 @@ class _textInputBoxState extends State<textInputBox> {
 }
 
 void doNothing() {}
+
+double maxSize(BuildContext context, double max)
+{
+  double width = MediaQuery.of(context).size.width;
+  if(width > max) {
+    return max;
+  }
+  return width;
+}
