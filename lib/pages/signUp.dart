@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class signUp extends StatefulWidget {
   const signUp({Key? key}) : super(key: key);

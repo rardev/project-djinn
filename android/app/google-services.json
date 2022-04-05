@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "410466408923",
+    "project_id": "djinn-639dd",
+    "storage_bucket": "djinn-639dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410466408923:android:85d05194c3bba2a67aaffe",
+        "android_client_info": {
+          "package_name": "com.example.project_djinn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410466408923-m0f4n8b255nv89dpt2trt4kq3hip3f3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBll0hrQHulvgMOtTN4GllXxC5MYhFmEtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410466408923-m0f4n8b255nv89dpt2trt4kq3hip3f3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
