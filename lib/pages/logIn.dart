@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_djinn/services/auth.dart';
+import 'package:project_djinn/helperFiles/loading.dart';
 
 class logIn extends StatefulWidget {
   const logIn({Key? key}) : super(key: key);
@@ -9,34 +10,66 @@ class logIn extends StatefulWidget {
 }
 
 class _logInState extends State<logIn> {
+
+  late final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool loading = false;
+
+  String error = '';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? const Loading() : Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.pink,
           title: const Text('Login Screen'),
           centerTitle: true,
           elevation: 0.0,
         ),
-        body: Column(
-          children: const [
-            textInputBox(
-                label: 'Username',
-                isPassword: false,
-                boxSize: [0.0, 5.0, 0.0, 5.0]),
-            textInputBox(
-                label: 'Password',
-                isPassword: true,
-                boxSize: [0.0, 5.0, 0.0, 5.0]),
-            MaterialButton(
-              onPressed: doNothing,
-              color: Colors.green,
-              child: Text(
-                'Submit',
-                style: TextStyle(color: Colors.white),
+        body: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const textInputBox(
+                  label: 'Email',
+                  isPassword: false,
+                  boxSize: [0.0, 5.0, 0.0, 5.0]),
+              const textInputBox(
+                  label: 'Password',
+                  isPassword: true,
+                  boxSize: [0.0, 5.0, 0.0, 5.0]),
+              MaterialButton(
+                onPressed: () async{
+                  if(_formKey.currentState!.validate())
+                  {
+                    setState(() => loading = true);
+                    dynamic result = await _auth.loginEmailAndPassword(store.get('Email'), store.get('Password'));
+                    if(result == null)
+                    {
+                      setState(() {
+                        error = 'could not sign in with those credentials';
+                        loading = false;
+                        });
+                    }
+                    else
+                    {
+                      Navigator.pop(context);
+                    }
+                  }
+                },
+                color: Colors.green,
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 12.0,),
+              Text(
+                error,
+                style: const TextStyle(color: Colors.red, fontSize: 14.0),
+              )
+            ],
+          ),
         ));
   }
 }
@@ -59,6 +92,8 @@ class textInputBox extends StatefulWidget {
 
 class _textInputBoxState extends State<textInputBox> {
   final textController = TextEditingController();
+
+  String parameter = '';
   //final double left = 200.0;
   //List box = ;
 
@@ -69,7 +104,12 @@ class _textInputBoxState extends State<textInputBox> {
         width: maxSize(context, 500.0),
         child: Padding(
           padding: EdgeInsets.fromLTRB(widget.boxSize[0], widget.boxSize[1], widget.boxSize[2], widget.boxSize[3]),
-          child: TextField(
+          child: TextFormField(
+            validator: (val) => val!.isEmpty ? 'Enter ${widget.label}' : null,
+            onChanged: (val) {
+              setState(() => parameter = val);
+              store.set(widget.label, parameter);
+            },
             controller: textController,
             obscureText: widget.isPassword,
             //expands: true,
@@ -102,3 +142,16 @@ double maxSize(BuildContext context, double max)
   }
   return width;
 }
+
+class GlobalState
+{
+  final Map<dynamic, dynamic> _data = <dynamic, dynamic>{};
+
+  static GlobalState instance = GlobalState._();
+  GlobalState._();
+
+  set(dynamic key, dynamic value) => _data[key] = value;
+  get(dynamic key) => _data[key];
+}
+
+final GlobalState store = GlobalState.instance;
