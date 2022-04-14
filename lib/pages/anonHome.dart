@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:project_djinn/services/auth.dart';
+import 'package:project_djinn/helperFiles/forms.dart';
 
 class AnonHome extends StatefulWidget
 {
@@ -19,9 +21,9 @@ class _AnonHomeState extends State<AnonHome> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: const IconButton(
-          onPressed: doNothing,
-          icon: Icon(Icons.train),
+        title: IconButton(
+          onPressed: (){},
+          icon: const Icon(Icons.train),
           color: Colors.black,
         ),
         elevation: 0.0,
@@ -58,21 +60,25 @@ class _AnonHomeState extends State<AnonHome> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
+              //width: maxSize(context, 500),
               margin: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
-              child: const Text(
+              //color: Colors.red,
+              child: const AutoSizeText(
                 'Start Planning for',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 50.0,
+                  fontSize: 50,
                 ),
+                maxLines: 1,
               ),
             ),
-            const Text(
+            const AutoSizeText(
               'Your Birthday',
               style: TextStyle(
                 color: Colors.pink,
                 fontSize: 50.0,
               ),
+              maxLines: 1,
             ),
           ],
         ),
@@ -81,7 +87,19 @@ class _AnonHomeState extends State<AnonHome> {
   }
 }
 
+/*
+double maxSize(BuildContext context, double max)
+{
+  double width = MediaQuery.of(context).size.width;
+  print("width of screen: $width");
+  if(width/2 > max) {
+    return max;
+  }
+  return width;
+}
+
 void doNothing()
 {
 
 }
+ */
