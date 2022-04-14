@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_djinn/services/auth.dart';
 import 'package:project_djinn/helperFiles/loading.dart';
 
@@ -17,6 +18,27 @@ class _logInState extends State<logIn> {
 
   String error = '';
 
+  void submit() async
+  {
+    if(_formKey.currentState!.validate())
+    {
+      setState(() => loading = true);
+      dynamic result = await _auth.loginEmailAndPassword(store.get('Email'), store.get('Password'));
+      if(result == null)
+      {
+        setState(() {
+          error = 'could not sign in with those credentials';
+          loading = false;
+        });
+      }
+      else
+      {
+        Navigator.pop(context);
+      }
+    }
+  }
+  var focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return loading ? const Loading() : Scaffold(
@@ -28,47 +50,57 @@ class _logInState extends State<logIn> {
         ),
         body: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              const textInputBox(
-                  label: 'Email',
-                  isPassword: false,
-                  boxSize: [0.0, 5.0, 0.0, 5.0]),
-              const textInputBox(
-                  label: 'Password',
-                  isPassword: true,
-                  boxSize: [0.0, 5.0, 0.0, 5.0]),
-              MaterialButton(
-                onPressed: () async{
-                  if(_formKey.currentState!.validate())
-                  {
-                    setState(() => loading = true);
-                    dynamic result = await _auth.loginEmailAndPassword(store.get('Email'), store.get('Password'));
-                    if(result == null)
+          child: RawKeyboardListener(
+            focusNode: focusNode,
+            onKey: (event) {
+              if(event.isKeyPressed(LogicalKeyboardKey.enter))
+              {
+                print("enter key has been pressed");
+                submit();
+              }
+            },
+            child: Column(
+              children: [
+                const textInputBox(
+                    label: 'Email',
+                    isPassword: false,
+                    boxSize: [0.0, 5.0, 0.0, 5.0]),
+                const textInputBox(
+                    label: 'Password',
+                    isPassword: true,
+                    boxSize: [0.0, 5.0, 0.0, 5.0]),
+                MaterialButton(
+                  onPressed: () async => submit(),/*() async{
+                    if(_formKey.currentState!.validate())
                     {
-                      setState(() {
-                        error = 'could not sign in with those credentials';
-                        loading = false;
-                        });
+                      setState(() => loading = true);
+                      dynamic result = await _auth.loginEmailAndPassword(store.get('Email'), store.get('Password'));
+                      if(result == null)
+                      {
+                        setState(() {
+                          error = 'could not sign in with those credentials';
+                          loading = false;
+                          });
+                      }
+                      else
+                      {
+                        Navigator.pop(context);
+                      }
                     }
-                    else
-                    {
-                      Navigator.pop(context);
-                    }
-                  }
-                },
-                color: Colors.green,
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.white),
+                  },*/
+                  color: Colors.green,
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12.0,),
-              Text(
-                error,
-                style: const TextStyle(color: Colors.red, fontSize: 14.0),
-              )
-            ],
+                const SizedBox(height: 12.0,),
+                Text(
+                  error,
+                  style: const TextStyle(color: Colors.red, fontSize: 14.0),
+                )
+              ],
+            ),
           ),
         ));
   }
@@ -110,6 +142,9 @@ class _textInputBoxState extends State<textInputBox> {
               setState(() => parameter = val);
               store.set(widget.label, parameter);
             },
+            //onFieldSubmitted: (value){
+            //  print(widget.label);
+            //},
             controller: textController,
             obscureText: widget.isPassword,
             //expands: true,
@@ -142,6 +177,7 @@ double maxSize(BuildContext context, double max)
   }
   return width;
 }
+
 
 class GlobalState
 {
