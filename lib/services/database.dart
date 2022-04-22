@@ -18,6 +18,14 @@ class DatabaseService
     });
   }
 
+  Future addToList(String listName, String itemName, [String? itemDescription, String? link]) async
+  {
+    return await userCollection.doc(uid).collection(listName).doc(itemName).set({
+      'description' : itemDescription,
+      'link' : link,
+    });
+  }
+
   //user info list from snapshot
   List<Info> _infoListFromSnapshot(QuerySnapshot snapshot)
   {
