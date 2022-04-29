@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
             //mainAxisAlignment: MainAxisAlignment.start,
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              //UserList(),
+              //UserList()
               UserInfo(category: 'First Name: ', data: info.first_name),
               UserInfo(category: 'Last Name: ', data: info.last_name),
               UserInfo(category: 'Username: ', data: info.username),
@@ -87,6 +87,22 @@ class _HomeState extends State<Home> {
                 color: HexColor("#4D2799"),
               ),
               child: const Text('Drawer Header'),
+            ),
+            ListTile(
+              title: const Text("Profile"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text("Create a list"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text("Settings"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: const Text("Settings"),
+              onTap: () {},
             ),
             ListTile(
               title: const Text("Logout"),

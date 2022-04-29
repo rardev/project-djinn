@@ -10,3 +10,4 @@ build/
 .packages
 .flutter-plugins
 .flutter-plugins-dependencies
+.build
