@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_djinn/services/auth.dart';
 import 'package:project_djinn/services/database.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:project_djinn/services/info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project_djinn/helperFiles/add_todo_button.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users'); //.doc();
 final GlobalState store = GlobalState.instance;
@@ -63,22 +65,24 @@ class _HomeState extends State<Home> {
               style: ElevatedButton.styleFrom(primary: HexColor("#683FB8"))),
           elevation: 0.0,
         ),
-        body: Center(
-          //child: Container(
-          //width: MediaQuery.of(context).size.width,
-          //color: Colors.white,
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.start,
-            //crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              //UserList()
-              UserInfo(category: 'First Name: ', data: info.first_name),
-              UserInfo(category: 'Last Name: ', data: info.last_name),
-              UserInfo(category: 'Username: ', data: info.username),
-              UserInfo(category: 'Phone Number: ', data: info.phone_number),
-            ],
-          ),
-          //),
+        body: Stack(
+          children: [
+              Column(
+              //mainAxisAlignment: MainAxisAlignment.start,
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //UserList()
+                UserInfo(category: 'First Name: ', data: info.first_name),
+                UserInfo(category: 'Last Name: ', data: info.last_name),
+                UserInfo(category: 'Username: ', data: info.username),
+                UserInfo(category: 'Phone Number: ', data: info.phone_number),
+              ],
+            ),
+            const Align(
+              alignment: Alignment.bottomRight,
+              child: AddTodoButton(),
+            )
+          ],
         ),
         endDrawer: Drawer(
           child: ListView(padding: EdgeInsets.zero, children: [
