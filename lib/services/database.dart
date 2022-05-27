@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:project_djinn/services/info.dart';
 
 class DatabaseService
 {
   final String uid;
   DatabaseService({required this.uid});
+  //DatabaseService({required this.lid});
   //collection reference
+  //final String lid;
   final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
+  final CollectionReference listCollection = FirebaseFirestore.instance.collection('lists');
 
   Future updateUserData(String fName, String lName, String username, String phone) async
   {
@@ -18,6 +22,7 @@ class DatabaseService
     });
   }
 
+  /*
   Future addToList(String listName, String itemName, [String? itemDescription, String? link]) async
   {
     return await userCollection.doc(uid).collection(listName).doc(itemName).set({
@@ -25,6 +30,25 @@ class DatabaseService
       'link' : link,
     });
   }
+   */
+
+  Future createList(String listName, String description, bool isPublic) async
+  {
+    dynamic viewPermission;
+    if(isPublic)
+      {
+        viewPermission = "ALL";
+      }
+    else
+    {
+        viewPermission = uid;
+    }
+    return await listCollection.doc(listName).set({
+      'description' : description,
+
+    });
+  }
+
 
   //user info list from snapshot
   List<Info> _infoListFromSnapshot(QuerySnapshot snapshot)

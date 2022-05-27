@@ -65,11 +65,11 @@ class _logInState extends State<logIn> {
                 const textInputBox(
                     label: 'Email',
                     isPassword: false,
-                    boxSize: [0.0, 5.0, 0.0, 5.0]),
+                    boxSize: [0.0, 5.0, 0.0, 5.0], borderStyle:OutlineInputBorder(), width: 500.0),
                 const textInputBox(
                     label: 'Password',
                     isPassword: true,
-                    boxSize: [0.0, 5.0, 0.0, 5.0]),
+                    boxSize: [0.0, 5.0, 0.0, 5.0], borderStyle:OutlineInputBorder(), width: 500.0),
                 MaterialButton(
                   onPressed: () async => submit(),
                   color: Colors.green,

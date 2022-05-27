@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'hero_dialog_route.dart';
+import 'package:project_djinn/helperFiles/forms.dart';
+import 'package:project_djinn/services/auth.dart';
+import 'package:project_djinn/services/database.dart';
 
 /// {@template add_todo_button}
 /// Button to add a new [Todo].
@@ -19,7 +22,7 @@ class AddTodoButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(HeroDialogRoute(builder: (context) {
-            return const _AddTodoPopupCard();
+            return _AddTodoPopupCard();
           }));
         },
         child: Hero(
@@ -52,9 +55,36 @@ const String _heroAddTodo = 'add-todo-hero';
 ///
 /// Uses a [Hero] with tag [_heroAddTodo].
 /// {@endtemplate}
-class _AddTodoPopupCard extends StatelessWidget {
+class _AddTodoPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  const _AddTodoPopupCard({Key? key}) : super(key: key);
+  _AddTodoPopupCard({Key? key}) : super(key: key);
+
+  @override
+  State<_AddTodoPopupCard> createState() => _AddTodoPopupCardState();
+}
+
+class _AddTodoPopupCardState extends State<_AddTodoPopupCard> {
+  //late final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool? _public = true;
+  late String name = "Public";
+  //int val = -1;
+
+  void submit() async
+  {
+    /*if(_formKey.currentState!.validate())
+    {
+      dynamic result = await DatabaseService()
+      if(result == null)
+      {
+
+      }
+      else
+      {
+
+      }
+    }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,51 +104,104 @@ class _AddTodoPopupCard extends StatelessWidget {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'List Title',
-                        border: InputBorder.none,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      /*
+                      const TextField(
+                        decoration: InputDecoration(
+                          hintText: 'List Title',
+                          border: InputBorder.none,
+                        ),
+                        cursorColor: Colors.white,
                       ),
-                      cursorColor: Colors.white,
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
-                    const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Give a description of the item',
-                        border: InputBorder.none,
+                      */
+                      const textInputBox(label: 'List Title', isPassword: false, boxSize: [0.0,0.0,0.0,0.0], borderStyle: InputBorder.none, width: 5000.0),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 0.2,
                       ),
-                      cursorColor: Colors.white,
-                      maxLines: 6,
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
-                    const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Provide a link',
-                        border: InputBorder.none,
+                      /*
+                      const TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Give a description of the list',
+                          border: InputBorder.none,
+                        ),
+                        cursorColor: Colors.white,
+                        maxLines: 6,
                       ),
-                      cursorColor: Colors.white,
-                    ),
-                    const Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.black12
+                      */
+                      const textInputBox(label: 'Description', isPassword: false, boxSize: [0.0,0.0,0.0,30.0], borderStyle: InputBorder.none, width: 5000.0),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 0.2,
                       ),
-                      child: const Text('Add'),
-                    ),
-                  ],
+                      Row(
+                        children: [
+                          //Text("This is a test"),
+                          /*ElevatedButton(
+                            onPressed: (){},
+                            child: const Text("Public"),
+                          ),*/
+                          ElevatedButton(
+                              onPressed: () {
+                                _public = !_public!;
+                                if(_public == true)
+                                  {
+                                    name = "Public";
+                                  }
+                                else
+                                  {
+                                    name = "Private";
+                                  }
+                                setState(() {
+
+                                });
+                              },
+                              child: Text(name),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.amber,
+                              ),
+                          ),
+                          /*ListTile(
+                            title: Text("Public"),
+                            leading: Radio(
+                              value: true,
+                              groupValue: _public,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _public = value;
+                                });
+                              },
+                              activeColor: Colors.green,
+                            ),
+                          ),
+                          ListTile(
+                            title: Text("Private"),
+                            leading: Radio(
+                              value: false,
+                              groupValue: _public,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _public = value;
+                                });
+                              },
+                              activeColor: Colors.green,
+                            ),
+                          )*/
+                        ],
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.black12
+                        ),
+                        child: const Text('Create'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

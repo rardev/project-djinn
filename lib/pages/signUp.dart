@@ -71,16 +71,16 @@ class _signUpState extends State<signUp> {
                   width: maxSize(context, 500.0),
                   child: Row(
                     children: const [
-                      Expanded(child: textInputBox(label: 'First Name', isPassword: false, boxSize: [0.0, 10.0, 5.0, 5.0])),
-                      Expanded(child: textInputBox(label: 'Last Name', isPassword: false, boxSize: [5.0, 10.0, 0.0, 5.0])),
+                      Expanded(child: textInputBox(label: 'First Name', isPassword: false, boxSize: [0.0, 10.0, 5.0, 5.0], borderStyle:OutlineInputBorder(), width: 500.0)),
+                      Expanded(child: textInputBox(label: 'Last Name', isPassword: false, boxSize: [5.0, 10.0, 0.0, 5.0], borderStyle:OutlineInputBorder(), width: 500.0)),
                     ],
                   ),
                 ),
-                const textInputBox(label: 'Username', isPassword: false, boxSize: [0.0,5.0,0.0,5.0]),
-                const textInputBox(label: 'Email', isPassword: false, boxSize: [0.0,5.0,0.0,5.0]),
-                const textInputBox(label: 'Password', isPassword: true, boxSize: [0.0,5.0,0.0,5.0]),
-                const textInputBox(label: 'Confirm Password', isPassword: true, boxSize: [0.0,5.0,0.0,5.0]),
-                const textInputBox(label: 'Phone Number', isPassword: false, boxSize: [0.0,5.0,0.0,5.0]),
+                const textInputBox(label: 'Username', isPassword: false, boxSize: [0.0,5.0,0.0,5.0], borderStyle:OutlineInputBorder(), width: 500.0),
+                const textInputBox(label: 'Email', isPassword: false, boxSize: [0.0,5.0,0.0,5.0], borderStyle:OutlineInputBorder(), width: 500.0),
+                const textInputBox(label: 'Password', isPassword: true, boxSize: [0.0,5.0,0.0,5.0], borderStyle:OutlineInputBorder(), width: 500.0),
+                const textInputBox(label: 'Confirm Password', isPassword: true, boxSize: [0.0,5.0,0.0,5.0], borderStyle:OutlineInputBorder(), width: 500.0),
+                const textInputBox(label: 'Phone Number', isPassword: false, boxSize: [0.0,5.0,0.0,5.0], borderStyle:OutlineInputBorder(), width: 500.0),
                 MaterialButton(
                     onPressed: () async => submit(),
                     color: Colors.green,
