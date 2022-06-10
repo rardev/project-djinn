@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
   late CustomUser user = Provider.of<CustomUser?>(context)!;
   late Info info =
-      Info(first_name: '#', last_name: 'B', username: 'C', phone_number: 'D');
+      Info(first_name: '', last_name: '', username: '', phone_number: '', UID: '');
 
   @override
   void initState() {
@@ -43,7 +43,9 @@ class _HomeState extends State<Home> {
           first_name: doc.get('first_name'),
           last_name: doc.get('last_name'),
           username: doc.get('username'),
-          phone_number: doc.get('phone_number'));
+          phone_number: doc.get('phone_number'),
+          UID: id);
+      store.set("UID", id);
     });
   }
 
@@ -76,6 +78,7 @@ class _HomeState extends State<Home> {
                 UserInfo(category: 'Last Name: ', data: info.last_name),
                 UserInfo(category: 'Username: ', data: info.username),
                 UserInfo(category: 'Phone Number: ', data: info.phone_number),
+                UserInfo(category: "UID: ", data: info.UID),
               ],
             ),
             const Align(

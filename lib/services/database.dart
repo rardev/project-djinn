@@ -59,6 +59,7 @@ class DatabaseService
           last_name: doc.get('last_name') ?? '',
           username: doc.get('username') ?? '',
           phone_number: doc.get('phone_number') ?? '',
+          UID: uid,
       );
     }).toList();
   }
