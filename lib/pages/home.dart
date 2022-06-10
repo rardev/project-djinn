@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
         ),
         body: Stack(
           children: [
-              Column(
+            Column(
               //mainAxisAlignment: MainAxisAlignment.start,
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
