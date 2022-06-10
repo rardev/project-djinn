@@ -4,6 +4,7 @@ class Info
    String last_name;
    String username;
    String phone_number;
+   String UID;
 
    void changeInfo(String fName, String lName, String username, String phone)
    {
@@ -12,5 +13,5 @@ class Info
      this.username = username;
      phone_number = phone;
    }
-  Info({required this.first_name, required this.last_name, required this.username, required this.phone_number});
+  Info({required this.first_name, required this.last_name, required this.username, required this.phone_number, required this.UID});
 }
