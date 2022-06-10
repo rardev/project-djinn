@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'hero_dialog_route.dart';
 import 'package:project_djinn/helperFiles/forms.dart';
-import 'package:project_djinn/services/auth.dart';
 import 'package:project_djinn/services/database.dart';
 
 /// {@template add_todo_button}
@@ -11,6 +10,14 @@ import 'package:project_djinn/services/database.dart';
 ///
 /// Uses a [Hero] with tag [_heroAddTodo].
 /// {@endtemplate}
+
+DateTime datetime = DateTime.now();
+
+void submit() async {
+  await DatabaseService(uid: store!.UID).updateListData(
+      lid, store.get('List Name'), store.get('List Description'), datetime);
+}
+
 class AddTodoButton extends StatelessWidget {
   /// {@macro add_todo_button}
   const AddTodoButton({Key? key}) : super(key: key);
@@ -31,10 +38,10 @@ class AddTodoButton extends StatelessWidget {
             return CustomRectTween(begin: begin, end: end);
           },*/
           child: Material(
-            color: Colors.deepPurple,//Color of button
+            color: Colors.deepPurple, //Color of button
             elevation: 2,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             child: const Icon(
               Icons.add_rounded,
               size: 56,
@@ -70,22 +77,6 @@ class _AddTodoPopupCardState extends State<_AddTodoPopupCard> {
   late String name = "Public";
   //int val = -1;
 
-  void submit() async
-  {
-    /*if(_formKey.currentState!.validate())
-    {
-      dynamic result = await DatabaseService()
-      if(result == null)
-      {
-
-      }
-      else
-      {
-
-      }
-    }*/
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -97,10 +88,10 @@ class _AddTodoPopupCardState extends State<_AddTodoPopupCard> {
             return CustomRectTween(begin: begin, end: end);
           },*/
           child: Material(
-            color: Colors.deepPurple,//Color of popup window
+            color: Colors.deepPurple, //Color of popup window
             elevation: 2,
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -109,31 +100,22 @@ class _AddTodoPopupCardState extends State<_AddTodoPopupCard> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      /*
-                      const TextField(
-                        decoration: InputDecoration(
-                          hintText: 'List Title',
-                          border: InputBorder.none,
-                        ),
-                        cursorColor: Colors.white,
-                      ),
-                      */
-                      const textInputBox(label: 'List Title', isPassword: false, boxSize: [0.0,0.0,0.0,0.0], borderStyle: InputBorder.none, width: 5000.0),
+                      const textInputBox(
+                          label: 'List Title',
+                          isPassword: false,
+                          boxSize: [0.0, 0.0, 0.0, 0.0],
+                          borderStyle: InputBorder.none,
+                          width: 5000.0),
                       const Divider(
                         color: Colors.white,
                         thickness: 0.2,
                       ),
-                      /*
-                      const TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Give a description of the list',
-                          border: InputBorder.none,
-                        ),
-                        cursorColor: Colors.white,
-                        maxLines: 6,
-                      ),
-                      */
-                      const textInputBox(label: 'Description', isPassword: false, boxSize: [0.0,0.0,0.0,30.0], borderStyle: InputBorder.none, width: 5000.0),
+                      const textInputBox(
+                          label: 'Description',
+                          isPassword: false,
+                          boxSize: [0.0, 0.0, 0.0, 30.0],
+                          borderStyle: InputBorder.none,
+                          width: 5000.0),
                       const Divider(
                         color: Colors.white,
                         thickness: 0.2,
@@ -146,24 +128,19 @@ class _AddTodoPopupCardState extends State<_AddTodoPopupCard> {
                             child: const Text("Public"),
                           ),*/
                           ElevatedButton(
-                              onPressed: () {
-                                _public = !_public!;
-                                if(_public == true)
-                                  {
-                                    name = "Public";
-                                  }
-                                else
-                                  {
-                                    name = "Private";
-                                  }
-                                setState(() {
-
-                                });
-                              },
-                              child: Text(name),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.amber,
-                              ),
+                            onPressed: () {
+                              _public = !_public!;
+                              if (_public == true) {
+                                name = "Public";
+                              } else {
+                                name = "Private";
+                              }
+                              setState(() {});
+                            },
+                            child: Text(name),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.amber,
+                            ),
                           ),
                           /*ListTile(
                             title: Text("Public"),
@@ -195,9 +172,8 @@ class _AddTodoPopupCardState extends State<_AddTodoPopupCard> {
                       ),
                       ElevatedButton(
                         onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.black12
-                        ),
+                        style:
+                            ElevatedButton.styleFrom(primary: Colors.black12),
                         child: const Text('Create'),
                       ),
                     ],
