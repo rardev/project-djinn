@@ -8,6 +8,7 @@ import 'package:project_djinn/services/info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project_djinn/helperFiles/add_todo_button.dart';
+import 'package:project_djinn/helperFiles/forms.dart';
 
 final usersRef = FirebaseFirestore.instance.collection('users'); //.doc();
 final GlobalState store = GlobalState.instance;
@@ -45,6 +46,10 @@ class _HomeState extends State<Home> {
           username: doc.get('username'),
           phone_number: doc.get('phone_number'),
           UID: id);
+      store.set("First Name", doc.get('first_name'));
+      store.set("Last Name", doc.get('last_name'));
+      store.set("Username", doc.get('username'));
+      store.set("Phone Number", doc.get('phone_number'));
       store.set("UID", id);
     });
   }
@@ -74,10 +79,10 @@ class _HomeState extends State<Home> {
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //UserList()
-                UserInfo(category: 'First Name: ', data: info.first_name),
-                UserInfo(category: 'Last Name: ', data: info.last_name),
-                UserInfo(category: 'Username: ', data: info.username),
-                UserInfo(category: 'Phone Number: ', data: info.phone_number),
+                UserInfo(category: 'First Name: ', data: store.get('First Name')/*info.first_name*/),
+                UserInfo(category: 'Last Name: ', data: store.get('Last Name')/*info.last_name*/),
+                UserInfo(category: 'Username: ', data: store.get('Username')/*info.username*/),
+                UserInfo(category: 'Phone Number: ', data: store.get('Phone Number')/*info.phone_number*/),
                 UserInfo(category: "UID: ", data: info.UID),
               ],
             ),
@@ -165,7 +170,7 @@ class UserInfo extends StatelessWidget {
   }
 }
 
-class GlobalState {
+/*class GlobalState {
   final Map<dynamic, dynamic> _data = <dynamic, dynamic>{};
 
   static GlobalState instance = GlobalState._();
@@ -173,6 +178,6 @@ class GlobalState {
 
   set(dynamic key, dynamic value) => _data[key] = value;
   get(dynamic key) => _data[key];
-}
+}*/
 
 void doNothing() {}
