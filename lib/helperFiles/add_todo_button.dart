@@ -14,8 +14,8 @@ import 'package:project_djinn/services/database.dart';
 DateTime datetime = DateTime.now();
 
 void submit() async {
-  await DatabaseService(uid: store!.UID).updateListData(
-      lid, store.get('List Name'), store.get('List Description'), datetime);
+  // await DatabaseService(uid: store!.UID).updateListData(
+  //lid, store.get('List Name'), store.get('List Description'), datetime);
 }
 
 class AddTodoButton extends StatelessWidget {

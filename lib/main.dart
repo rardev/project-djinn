@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:project_djinn/pages/profile.dart';
 import 'package:project_djinn/pages/wrapper.dart';
 import 'package:project_djinn/services/auth.dart';
 import 'package:project_djinn/services/user.dart';
@@ -24,22 +25,18 @@ class MyApp extends StatelessWidget {
     return FutureBuilder(
       future: Firebase.initializeApp(
           options: const FirebaseOptions(
-            apiKey: "AIzaSyAaZsAzN0C7wl0KKAw-LtaAjmWcDMGpaAk",
-            appId: "1:410466408923:web:bc79bbd631a39ac17aaffe",
-            messagingSenderId: "410466408923",
-            projectId: "djinn-639dd",
-          )
-      ),//_initialization,
-      builder: (context, snapshot)
-      {
-        if(snapshot.hasError)
-          {
-            print('Error');
-          }
-        if(snapshot.connectionState == ConnectionState.done)
-          {
-            return menu();
-          }
+        apiKey: "AIzaSyAaZsAzN0C7wl0KKAw-LtaAjmWcDMGpaAk",
+        appId: "1:410466408923:web:bc79bbd631a39ac17aaffe",
+        messagingSenderId: "410466408923",
+        projectId: "djinn-639dd",
+      )), //_initialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print('Error');
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return menu();
+        }
         return const CircularProgressIndicator();
       },
     );
@@ -74,6 +71,7 @@ class _menuState extends State<menu> {
           '/signUp': (context) => const signUp(),
           '/logIn': (context) => const logIn(),
           '/wrapper': (context) => const Wrapper(),
+          '/profile': (context) => const Profile(),
         },
         debugShowCheckedModeBanner: false,
       ),

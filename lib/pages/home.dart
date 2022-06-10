@@ -23,8 +23,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
   late CustomUser user = Provider.of<CustomUser?>(context)!;
-  late Info info =
-      Info(first_name: '', last_name: '', username: '', phone_number: '', UID: '');
+  late Info info = Info(
+      first_name: '', last_name: '', username: '', phone_number: '', UID: '');
 
   @override
   void initState() {
@@ -79,10 +79,18 @@ class _HomeState extends State<Home> {
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //UserList()
-                UserInfo(category: 'First Name: ', data: store.get('First Name')/*info.first_name*/),
-                UserInfo(category: 'Last Name: ', data: store.get('Last Name')/*info.last_name*/),
-                UserInfo(category: 'Username: ', data: store.get('Username')/*info.username*/),
-                UserInfo(category: 'Phone Number: ', data: store.get('Phone Number')/*info.phone_number*/),
+                UserInfo(
+                    category: 'First Name: ',
+                    data: store.get('First Name') /*info.first_name*/),
+                UserInfo(
+                    category: 'Last Name: ',
+                    data: store.get('Last Name') /*info.last_name*/),
+                UserInfo(
+                    category: 'Username: ',
+                    data: store.get('Username') /*info.username*/),
+                UserInfo(
+                    category: 'Phone Number: ',
+                    data: store.get('Phone Number') /*info.phone_number*/),
                 UserInfo(category: "UID: ", data: info.UID),
               ],
             ),
@@ -102,7 +110,9 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               title: const Text("Profile"),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/profile');
+              },
             ),
             ListTile(
               title: const Text("Create a list"),
