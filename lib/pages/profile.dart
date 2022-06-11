@@ -77,7 +77,11 @@ class _ProfileState extends State<Profile> {
           ListTile(
             title: const Text("Home"),
             onTap: () {
+              //Navigator.popAndPushNamed(context, '/home');
               Navigator.pop(context);
+              Navigator.pop(context);
+              //Navigator.of(context).pop();
+              //Navigator.of(context).pop(context);
             },
           ),
           ListTile(

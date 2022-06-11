@@ -81,17 +81,17 @@ class _HomeState extends State<Home> {
                 //UserList()
                 UserInfo(
                     category: 'First Name: ',
-                    data: store.get('First Name') /*info.first_name*/),
+                    data: store.get('First Name') ?? '' /*info.first_name*/),
                 UserInfo(
                     category: 'Last Name: ',
-                    data: store.get('Last Name') /*info.last_name*/),
+                    data: store.get('Last Name') ?? '' /*info.last_name*/),
                 UserInfo(
                     category: 'Username: ',
-                    data: store.get('Username') /*info.username*/),
+                    data: store.get('Username') ?? '' /*info.username*/),
                 UserInfo(
                     category: 'Phone Number: ',
-                    data: store.get('Phone Number') /*info.phone_number*/),
-                UserInfo(category: "UID: ", data: info.UID),
+                    data: store.get('Phone Number') ?? '' /*info.phone_number*/),
+                UserInfo(category: "UID: ", data: store.get('UID') ?? ''),
               ],
             ),
             const Align(
@@ -111,15 +111,12 @@ class _HomeState extends State<Home> {
             ListTile(
               title: const Text("Profile"),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, '/profile');
               },
             ),
             ListTile(
               title: const Text("Create a list"),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text("Settings"),
               onTap: () {},
             ),
             ListTile(
